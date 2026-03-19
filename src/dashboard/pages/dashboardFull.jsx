@@ -92,6 +92,20 @@ const DashboardFull = () => {
 
   // ⭐ ADDED: Title that depends on localStorage role (read on mount to avoid SSR/hydration issues)
   const [dashboardTitle, setDashboardTitle] = useState("Dashboard");
+
+
+    useEffect(() => {
+    const token = localStorage.getItem("token");
+    const refreshToken = localStorage.getItem("refreshToken");
+    const role = localStorage.getItem("role");
+
+    // ⚠️ user is stored as string → parse it
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    console.log("Token:", token);
+    console.log("Role:", user.role);
+    console.log("User:", user);
+  }, []);
   useEffect(() => {
     try {
       const roleRaw = localStorage.getItem("role") || "";

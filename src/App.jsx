@@ -34,6 +34,7 @@ import PackingList from "./components/layout/SideBarPages/PackingList";
 import CrmTask from "./components/layout/SideBarPages/CrmTask";
 import { Toaster } from "sonner";
 import { RouteIcon } from "lucide-react";
+import CompanyForm from "./login/CompanyForm";
 
 // import master from "./components/assets/cloud.png";
 const routeModules = import.meta.glob("./*/AppRoutes.jsx", { eager: true });
@@ -89,6 +90,7 @@ const App = () => {
       <Routes>
         {/* Public/Login routes */}
         <Route path="/" element={<Login />} />
+        <Route path="/signup" element={<CompanyForm />} />
 
 
         {/* Routes WITHOUT sidebar/header */}

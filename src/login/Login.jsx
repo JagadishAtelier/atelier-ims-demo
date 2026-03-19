@@ -3,7 +3,7 @@ import loginIllustration from "/inventoryBg.svg";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import BASE_API from "../api/api.js";
+import { BASE_API_LOG } from "../api/api";
 import { toast } from "sonner";
 
 const Login = () => {
@@ -73,7 +73,7 @@ const Login = () => {
         password,
       };
 
-      const res = await axios.post(`${BASE_API}/user/login`, payload, {
+      const res = await axios.post(`${BASE_API_LOG}/user/login`, payload, {
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
@@ -289,6 +289,7 @@ const Login = () => {
             {/* Signup Button */}
             <button
               type="button"
+              onClick={()=>navigate("/signup")}
               className="w-full py-2.5 rounded-lg border border-blue-600 text-blue-600 font-medium hover:bg-blue-50 transition"
             >
               Signup Now
