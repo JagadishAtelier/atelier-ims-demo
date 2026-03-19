@@ -38,7 +38,7 @@ import {
 } from "lucide-react";
 import dashboardService from "../service/dashboardService";
 import { color } from "framer-motion";
-
+import { jwtDecode } from "jwt-decode";
 const { Title, Text } = Typography;
 
 const styles = {
@@ -94,14 +94,19 @@ const DashboardFull = () => {
   const [dashboardTitle, setDashboardTitle] = useState("Dashboard");
 
 
-    useEffect(() => {
+  useEffect(() => {
     const token = localStorage.getItem("token");
     const refreshToken = localStorage.getItem("refreshToken");
     const role = localStorage.getItem("role");
 
     // ⚠️ user is stored as string → parse it
     const user = JSON.parse(localStorage.getItem("user"));
+    if (token) {
+      const decoded = jwtDecode(token);
 
+      console.log("Full Decoded Token:", decoded);
+      console.log("User ID:", decoded.id);
+    }
     console.log("Token:", token);
     console.log("Role:", user.role);
     console.log("User:", user);
@@ -392,41 +397,41 @@ const DashboardFull = () => {
         value: summary.totalBills ?? 0,
         meta: "Number of bills",
         icon: <img src={BillsGIF} alt="Total Bills" className="w-10 h-10" />,
-        color: "transparent", 
-        noBg: true,             
+        color: "transparent",
+        noBg: true,
         linkTo: "/billing/list",
-        
-      },      
+
+      },
       {
         id: "users",
         title: "Total Users",
         value: summary.totalUsers ?? 0,
         meta: "Registered users",
         icon: <img src={UserGIF} alt="Total Users" className="w-10 h-10" />,
-        color: "transparent",  
-        noBg: true,            
+        color: "transparent",
+        noBg: true,
         linkTo: "/user",
-      },      
+      },
       {
         id: "products",
         title: "Total Products",
         value: summary.totalProducts ?? 0,
         meta: "Available products",
         icon: <img src={ProductGIF} alt="Total Products" className="w-10 h-10" />,
-        color: "transparent",   
-        noBg: true,             
+        color: "transparent",
+        noBg: true,
         linkTo: "/product/list",
-      },      
+      },
       {
         id: "revenue",
         title: "Total Revenue",
         value: `₹${summary.totalRevenue ?? 0}`,
         meta: "Revenue generated",
         icon: <img src={RevenueGrowth} alt="Revenue Growth" className="w-10 h-10" />,
-        color: "transparent",   
-        noBg: true,             
+        color: "transparent",
+        noBg: true,
         linkTo: "/report",
-      }      
+      }
     ];
 
 
