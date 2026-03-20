@@ -35,6 +35,7 @@ import CrmTask from "./components/layout/SideBarPages/CrmTask";
 import { Toaster } from "sonner";
 import { RouteIcon } from "lucide-react";
 import CompanyForm from "./login/CompanyForm";
+import ExpirationOverlay from "./login/ExpirationOverlay";
 
 // import master from "./components/assets/cloud.png";
 const routeModules = import.meta.glob("./*/AppRoutes.jsx", { eager: true });
@@ -91,6 +92,7 @@ const App = () => {
         {/* Public/Login routes */}
         <Route path="/" element={<Login />} />
         <Route path="/signup" element={<CompanyForm />} />
+        <Route path="/expiry" element={<ExpirationOverlay />} />
 
 
         {/* Routes WITHOUT sidebar/header */}

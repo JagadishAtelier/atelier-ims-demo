@@ -83,8 +83,15 @@ const Login = () => {
       // save the raw response for debugging/display
       setLastResponse(res.data ?? res);
 
-      const { message: responseMessage, token, refreshToken, user, role_name } = res.data;
-
+      const { message: responseMessage, token, refreshToken, user, role_name, demoExpired } = res.data;
+      // If demo expired, show toast and navigate to expiry page
+      if (demoExpired) {
+        toast.error("Demo period expired. Redirecting...");
+        setTimeout(() => {
+          navigate("/expiry"); // your expiry page route
+        }, 1500); // 1.5s delay so user sees toast
+        return;
+      }
       if (token && user) {
         localStorage.setItem("token", token);
         localStorage.setItem("refreshToken", refreshToken);
@@ -175,9 +182,8 @@ const Login = () => {
                     id="email"
                     type="email"
                     placeholder="you@company.com"
-                    className={`w-full bg-gray-100 rounded-lg border px-4 py-2 pr-12 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                      emailError ? "border-red-500" : "border-gray-300"
-                    }`}
+                    className={`w-full bg-gray-100 rounded-lg border px-4 py-2 pr-12 focus:outline-none focus:ring-2 focus:ring-blue-500 ${emailError ? "border-red-500" : "border-gray-300"
+                      }`}
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                   />
@@ -202,9 +208,8 @@ const Login = () => {
                     id="mobile"
                     type="tel"
                     placeholder="10-digit mobile number"
-                    className={`w-full bg-gray-100 rounded-lg border px-4 py-2 pr-12 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                      mobileError ? "border-red-500" : "border-gray-300"
-                    }`}
+                    className={`w-full bg-gray-100 rounded-lg border px-4 py-2 pr-12 focus:outline-none focus:ring-2 focus:ring-blue-500 ${mobileError ? "border-red-500" : "border-gray-300"
+                      }`}
                     value={mobile}
                     onChange={(e) => setMobile(e.target.value)}
                   />
@@ -228,9 +233,8 @@ const Login = () => {
                   id="password"
                   type={showPassword ? "text" : "password"}
                   placeholder="••••••••"
-                  className={`w-full rounded-lg bg-gray-100 border px-4 py-2 pr-20 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                    passwordError ? "border-red-500" : "border-gray-300"
-                  }`}
+                  className={`w-full rounded-lg bg-gray-100 border px-4 py-2 pr-20 focus:outline-none focus:ring-2 focus:ring-blue-500 ${passwordError ? "border-red-500" : "border-gray-300"
+                    }`}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
@@ -289,7 +293,7 @@ const Login = () => {
             {/* Signup Button */}
             <button
               type="button"
-              onClick={()=>navigate("/signup")}
+              onClick={() => navigate("/signup")}
               className="w-full py-2.5 rounded-lg border border-blue-600 text-blue-600 font-medium hover:bg-blue-50 transition"
             >
               Signup Now
