@@ -99,7 +99,7 @@ const CompanyForm = () => {
       setShowOtp(false);
       setOtp("");
       
-navigate("/dashboard")
+navigate("/")
     } catch (err) {
       alert(err.response?.data?.message || "Invalid OTP");
     } finally {

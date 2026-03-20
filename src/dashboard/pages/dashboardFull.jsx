@@ -94,23 +94,27 @@ const DashboardFull = () => {
   const [dashboardTitle, setDashboardTitle] = useState("Dashboard");
 
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    const refreshToken = localStorage.getItem("refreshToken");
-    const role = localStorage.getItem("role");
+useEffect(() => {
+  const token = localStorage.getItem("token");
+  const refreshToken = localStorage.getItem("refreshToken");
 
-    // ⚠️ user is stored as string → parse it
-    const user = JSON.parse(localStorage.getItem("user"));
-    if (token) {
-      const decoded = jwtDecode(token);
+  // ⚠️ user is stored as string → parse it
+  const user = JSON.parse(localStorage.getItem("user"));
 
-      console.log("Full Decoded Token:", decoded);
-      console.log("User ID:", decoded.id);
-    }
-    console.log("Token:", token);
-    console.log("Role:", user.role);
-    console.log("User:", user);
-  }, []);
+  if (token) {
+    const decoded = jwtDecode(token);
+
+    console.log("Full Decoded Token:", decoded);
+    console.log("User ID:", decoded.id);
+    console.log("Company ID:", decoded.company_id); // ✅ log company ID
+    console.log("Role from Token:", decoded.role);
+  }
+
+  console.log("Token:", token);
+  console.log("Refresh Token:", refreshToken);
+  console.log("Role from LocalStorage:", user?.role);
+  console.log("User from LocalStorage:", user);
+}, []);
   useEffect(() => {
     try {
       const roleRaw = localStorage.getItem("role") || "";
