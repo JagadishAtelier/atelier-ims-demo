@@ -240,7 +240,7 @@ element={
     </ProtectedRoute>
   }
 />
-<Route
+{/* <Route
   path="/return"
   element={
     <ProtectedRoute>
@@ -271,7 +271,7 @@ element={
       <ViewReturn />
     </ProtectedRoute>
   }
-/>
+/> */}
 
 <Route
   path="/shipping"
